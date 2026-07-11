@@ -42,10 +42,19 @@ async def search_category(category:str):
     return "NOT FOUND SUCH CATEGORY OF BOOK"
 
 ## 这里是路径参数和查询参数混合
-@app.get('/books/q/{category}') # 注意这里如果不加/q/会和第一个路径查询函数冲突！
-async def books_query(category:str, author:str | None = "author one"):
+@app.get('/books/q/{category}')
+# 注意这里如果不加/q/会和第一个路径查询函数冲突！
+# url就会变成/books/math?author=Author%20Five
+# 在第一个路径里相当于查询title = math?author=Author%20Five
+async def books_query(category:str, author:str | None = None ):
+    result = []
     for i in BOOKS:
         if i.get('category') == category:
-            if i.get('author',None) == author:
-                return i
-    return "NOT FOUND SUCH BOOK"
+            if author == None :
+               result.append(i)
+            elif i.get('author') == author:
+                result.append(i)
+    if result:
+        return result
+    # 这里fastapi会自动把结果转换成json，json也可以是数组和普通字符串
+    return "NOT FOUND SUCH BOOKLLLL"
