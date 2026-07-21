@@ -19,7 +19,10 @@ from typing import Annotated
 from pydantic import Field,BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from enum import Enum
+
 app = FastAPI()
+
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5500", "http://127.0.0.1:5500"],
@@ -27,6 +30,13 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.get('/health')
+async def health_check():
+    return {"project" : "Betting",
+            "status" : "ok" }
+
+
 # GET /api/v1/predictions/{event_id}：获取特定竞猜事件当前的奖池与状态。
 @app.get('/predictions/{event_id}')
 async def get_evens(event_id : str):

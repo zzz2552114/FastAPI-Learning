@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Markdown Blog</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <h1>My Markdown Blog</h1>
+    <button id="check-backend">检查后端</button> 
+    <p id="message">尚未检查</p>
+    <script src="scripts/check-backend.js"></script>
+    <div id="button-list"></div>
+    <div>
+        <div id="related"></div>
+        <div id="content"></div>
+    </div>
+    <button id="latest">最新文章</button>
+    <script src="scripts/get-file.js"></script>
+    <form id="post-form">
+        <input id="post-title" placeholder="标题" required>
+        <input id="post-author" placeholder="作者" required>
+        <textarea id="post-content" placeholder="正文" required></textarea>
+        <button id="submit-button">创建文章</button>
+        <button id="preview-button" type="button">预览文章</button>
+    </form>
+    <script src="scripts/post.js"></script>
+</body>
+</html>
